@@ -9,7 +9,7 @@ from functools import lru_cache
 
 import cv2
 import numpy as np
-import OpenEXR
+#import OpenEXR
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow
@@ -58,6 +58,8 @@ def process_and_display_tensor(input_tensor, frame_count, metadata):
 
 def convert_and_inject_tensor(exr_path):
     """Convert EXR to tensor and inject it directly."""
+    """
+    # SS Removed OpenEXR usage
     with closing(OpenEXR.InputFile(exr_path)) as exr_file:
         tensor_data = imx500.prepare_tensor_for_injection(exr_file)
 
@@ -87,7 +89,8 @@ def convert_and_inject_tensor(exr_path):
             os.close(memfd)
         except OSError:
             pass
-
+    """
+    pass
 
 def load_specific_tensor(target_index):
     """Load a specific tensor by index."""
