@@ -12,7 +12,7 @@ from typing import List, Optional
 import Imath
 import jsonschema
 import numpy as np
-import OpenEXR
+#import OpenEXR
 from libarchive.read import fd_reader
 from libcamera import Rectangle, Size
 from tqdm import tqdm
@@ -526,6 +526,10 @@ class IMX500:
 
         return np.transpose(r1, (1, 2, 0)).astype(np.uint8)
 
+    def prepare_tensor_for_injection(self, exr_input) -> bytes:
+        raise RuntimeError("OpenEXR not supported")
+      
+    """
     def prepare_tensor_for_injection(self, exr_input: OpenEXR.InputFile) -> bytes:
         if not isinstance(exr_input, OpenEXR.InputFile):
             raise ValueError("exr_input must be an OpenEXR.InputFile")
@@ -617,6 +621,7 @@ class IMX500:
             planar_data = np.concatenate([b_padded.flatten(), g_padded.flatten(), r_padded.flatten()])
 
         return planar_data.tobytes()
+    """    
 
     def get_outputs(self, metadata: dict, add_batch=False) -> Optional[list[np.ndarray]]:
         """Get the model outputs."""
